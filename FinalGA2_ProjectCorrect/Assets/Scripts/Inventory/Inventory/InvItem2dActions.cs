@@ -46,7 +46,7 @@ public class InvItem2dActions : MonoBehaviour
         }
         else 
         {
-            InvItem3D.SetActive(false);
+             InvItem3D.SetActive(false);
 
             InvItem3D.transform.localScale = new Vector3(4, 4, 4);
 
