@@ -19,9 +19,7 @@ public class InventoryItem : MonoBehaviour
             //hide 3d object
             transform.gameObject.SetActive(false);
             
-            //unlock the cursor
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            
 
             //show the icon in the invemtory bar
             InvItem2d.gameObject.SetActive(true);
