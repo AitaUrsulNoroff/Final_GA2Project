@@ -1,15 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;  //Need this to get at GUI elements
 
+[RequireComponent(typeof(SphereCollider))]
 
 public class InventoryItem : MonoBehaviour
 {
+    public float pickupRange = 1.5f;
     public Image InvItem2d;     //image in inventory for this object
     bool isInTrigger = false;   //is player in trigger volume at the moment?
+    public bool isForBackpack, isForCharger, isForGrowthTank;  //Capital means space between words.
+    public BackPackFilling backpackFilling;
+    public BatteryChargerFilling batteryChargerFilling;
+    public AlgaeGrowthFiller algaeGrowthFiller;
+    private SphereCollider sphereCollider;
 
-    
+    private void Start()
+    {
+        sphereCollider = GetComponent<SphereCollider>();
+
+        sphereCollider.isTrigger = true;
+
+        sphereCollider.radius = pickupRange;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -18,8 +34,12 @@ public class InventoryItem : MonoBehaviour
         {
             //hide 3d object
             transform.gameObject.SetActive(false);
-            
-            
+
+            if (isForBackpack) backpackFilling.backpackItems.Add(InvItem2d);
+
+            if (isForCharger) batteryChargerFilling.hasCollectedBattery = true;
+
+            if (isForGrowthTank) algaeGrowthFiller.hasCollectedAlgaeVial = true;
 
             //show the icon in the invemtory bar
             InvItem2d.gameObject.SetActive(true);

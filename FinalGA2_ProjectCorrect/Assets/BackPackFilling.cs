@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BackPackFilling : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BackPackFilling : MonoBehaviour
     [SerializeField] GameObject[] itemList;
     private BoxCollider boxCollider;
     [SerializeField] float delay = 1;
+    public int numberOfRequiredItems = 5;
+    public List<Image> backpackItems = new List<Image>();
 
     // Start is called before the first frame update
     void Start()
@@ -28,17 +31,26 @@ public class BackPackFilling : MonoBehaviour
 
         if (!Input.GetKeyDown(KeyCode.E)) return;
 
-        isInTrigger = false;
+        if (backpackItems.Count == numberOfRequiredItems) 
+        {
+            isInTrigger = false;
 
-        boxCollider.enabled = false;
+            boxCollider.enabled = false;
 
-        StartCoroutine(StartAnimatonDelay());
+            StartCoroutine(StartAnimatonDelay());
+
+
+        }
+
+        
     }
     IEnumerator StartAnimatonDelay()
     {
         for (int i = 0; i < animators.Count; i++)
         {
             meshRenderers[i].enabled = true;
+
+            backpackItems[i].gameObject.SetActive (false);
 
             animators[i].Play();
             yield return new WaitForSeconds(delay);
