@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class AlgaeGrowthFiller : MonoBehaviour
     public Image algaeVial2DImage;
     private BoxCollider boxCollider;
     private bool isInTrigger;
+    public TMP_Text text, questComplete;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,6 +50,9 @@ public class AlgaeGrowthFiller : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.E)) return;
 
         if (!hasCollectedAlgaeVial) return;
+
+        QuestLog.FormatString(text);
+        QuestLog.FormatString(questComplete);
 
         hasCollectedAlgaeVial = false;
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,9 @@ public class BatteryChargerFilling : MonoBehaviour
     public Image battery2DImage;
     private BoxCollider boxCollider;
     private bool isInTrigger;
+    public TMP_Text text;
+    
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,6 +51,8 @@ public class BatteryChargerFilling : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.E)) return;
 
         if (!hasCollectedBattery) return;
+
+        QuestLog.FormatString(text);
 
         hasCollectedBattery = false;
 

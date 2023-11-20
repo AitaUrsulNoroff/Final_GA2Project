@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;  //Need this to get at GUI elements
@@ -16,6 +17,8 @@ public class InventoryItem : MonoBehaviour
     public BatteryChargerFilling batteryChargerFilling;
     public AlgaeGrowthFiller algaeGrowthFiller;
     private SphereCollider sphereCollider;
+    public TMP_Text text;
+
 
     private void Start()
     {
@@ -35,15 +38,29 @@ public class InventoryItem : MonoBehaviour
             //hide 3d object
             transform.gameObject.SetActive(false);
 
-            if (isForBackpack) backpackFilling.backpackItems.Add(InvItem2d);
+            if (isForBackpack) 
+            {
+                
+                
+                backpackFilling.backpackItems.Add(InvItem2d);
+            }
 
-            if (isForCharger) batteryChargerFilling.hasCollectedBattery = true;
+            if (isForCharger) 
+            { 
+                batteryChargerFilling.hasCollectedBattery = true; 
+            }
 
-            if (isForGrowthTank) algaeGrowthFiller.hasCollectedAlgaeVial = true;
+            if (isForGrowthTank) 
+            {
+                algaeGrowthFiller.hasCollectedAlgaeVial = true;
+            }
 
             //show the icon in the invemtory bar
             InvItem2d.gameObject.SetActive(true);
-            
+
+            if (!text) return;
+
+            QuestLog.FormatString(text);
         }
     }
 

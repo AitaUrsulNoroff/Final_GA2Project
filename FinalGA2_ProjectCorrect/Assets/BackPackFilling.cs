@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class BackPackFilling : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class BackPackFilling : MonoBehaviour
     [SerializeField] float delay = 1;
     public int numberOfRequiredItems = 5;
     public List<Image> backpackItems = new List<Image>();
+    public TMP_Text text;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +43,7 @@ public class BackPackFilling : MonoBehaviour
 
             StartCoroutine(StartAnimatonDelay());
 
-
+            QuestLog.FormatString(text);
         }
 
         
