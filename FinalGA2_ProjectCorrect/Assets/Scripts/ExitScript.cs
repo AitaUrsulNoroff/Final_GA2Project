@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class ExitScript : MonoBehaviour
 {
     public Image panelExit;
-    public GameObject exitButton;
+    public GameObject exitButton, descriptions;
+    bool isCursorIsLocked;
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +29,33 @@ public class ExitScript : MonoBehaviour
     public void ToggleCursorLockMode()
     {
         if (Cursor.lockState == CursorLockMode.Locked)
+        {
             Cursor.lockState = CursorLockMode.None;
+
+            isCursorIsLocked = false;
+
+        }
+
         else
+        {
+            isCursorIsLocked = true;
+
             Cursor.lockState = CursorLockMode.Locked;
+
+
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (isCursorIsLocked)
+        {
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.visible = true;
+        }
     }
 
     // Update is called once per frame
@@ -40,6 +65,8 @@ public class ExitScript : MonoBehaviour
         { 
             panelExit.enabled = !panelExit.enabled;
             exitButton.SetActive(panelExit.enabled);
+            descriptions.SetActive(panelExit.enabled);
+
 
             ToggleCursorLockMode();
 
