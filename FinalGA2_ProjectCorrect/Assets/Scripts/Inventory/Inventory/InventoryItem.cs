@@ -18,6 +18,7 @@ public class InventoryItem : MonoBehaviour
     public AlgaeGrowthFiller algaeGrowthFiller;
     private SphereCollider sphereCollider;
     public TMP_Text text;
+    public bool canPickup = true;
 
 
     private void Start()
@@ -33,7 +34,7 @@ public class InventoryItem : MonoBehaviour
     void Update()
     {
         //E key press AND player in volume
-        if( Input.GetKeyDown(KeyCode.E) && isInTrigger)
+        if( Input.GetKeyDown(KeyCode.E) && isInTrigger && canPickup)
         {
             //hide 3d object
             transform.gameObject.SetActive(false);

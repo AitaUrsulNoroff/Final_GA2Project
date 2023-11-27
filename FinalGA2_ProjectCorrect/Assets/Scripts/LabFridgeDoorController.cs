@@ -4,7 +4,26 @@ using UnityEngine;
 
 public class LabFridgeDoorController : MonoBehaviour
 {
+
     Animator LabFridgeDoor;
+    bool isInTrigger = false;
+    bool isOpen = false;
+    public InventoryItem vial;
+    public void OnTriggerEnter (Collider other) 
+    
+
+    {
+        if (other.CompareTag("Player"))
+            isInTrigger = true;
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+           isInTrigger = false;
+        }
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -15,27 +34,35 @@ public class LabFridgeDoorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.E) && isInTrigger && !isOpen)
         {
             if (LabFridgeDoor)
             {
                 Debug.Log("door open");
                 LabFridgeDoor.SetTrigger("openDoor");
+                isOpen = true;
+
+                vial.canPickup = true;
             }
             else
             {
                 Debug.Log("no door!");
 
             }
+
+            
         } 
         
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && isInTrigger && isOpen)
         {
             if (LabFridgeDoor)
             {
                 Debug.Log("door close");
                 LabFridgeDoor.SetTrigger("closeDoor");
+                isOpen = false;
 
+                vial.canPickup = false;
             }
             else
             {
