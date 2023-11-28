@@ -33,8 +33,10 @@ public class InventoryItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canPickup) return;
+
         //E key press AND player in volume
-        if( Input.GetKeyDown(KeyCode.E) && isInTrigger && canPickup)
+        if( Input.GetKeyDown(KeyCode.E) && isInTrigger)
         {
             //hide 3d object
             transform.gameObject.SetActive(false);

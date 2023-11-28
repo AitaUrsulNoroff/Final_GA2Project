@@ -24,6 +24,13 @@ public class LabFridgeDoorController : MonoBehaviour
         }
 
     }
+    IEnumerator DelayCanPickup()  
+    {
+        yield return new WaitForEndOfFrame();
+
+        vial.canPickup = !vial.canPickup;
+    
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +50,9 @@ public class LabFridgeDoorController : MonoBehaviour
                 LabFridgeDoor.SetTrigger("openDoor");
                 isOpen = true;
 
-                vial.canPickup = true;
+                StartCoroutine(DelayCanPickup());
+
+                //vial.canPickup = true;
             }
             else
             {
@@ -62,7 +71,9 @@ public class LabFridgeDoorController : MonoBehaviour
                 LabFridgeDoor.SetTrigger("closeDoor");
                 isOpen = false;
 
-                vial.canPickup = false;
+                StartCoroutine(DelayCanPickup());
+
+                //vial.canPickup = false;
             }
             else
             {
